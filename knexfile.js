@@ -1,9 +1,14 @@
-// Update with your config settings.
+require("dotenv").config();
 
 module.exports = {
   development: {
-    client: "postgresql",
-    connection: process.env.DATABASE_URL,
+    client: "pg",
+    connection: {
+      host: "localhost",
+      user: "postgres",
+      password: "1StarPopSuper",
+      database: "comake",
+    },
     migrations: {
       directory: "./data/migrations",
     },
@@ -16,7 +21,7 @@ module.exports = {
     },
 
     testing: {
-      client: "postgresql",
+      client: "pg",
       connection: process.env.DATABASE_URL,
       migrations: {
         directory: "./data/migrations",
@@ -31,7 +36,7 @@ module.exports = {
     },
 
     production: {
-      client: "postgresql",
+      client: "pg",
       connection: process.env.DATABASE_URL,
       pool: {
         min: 2,
