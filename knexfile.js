@@ -1,4 +1,5 @@
-require("dotenv").config({ path: "./" });
+const dotenv = require("dotenv").config({ path: "./" });
+dotenv.load();
 
 module.exports = {
   development: {
