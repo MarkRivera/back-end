@@ -16,7 +16,7 @@ server.use(morgan("dev"));
 server.use("/api/auth", authRoutes);
 server.use("/api/users", userRoutes);
 
-server.use("/", (error, req, res) => {
+server.use("/", (error, req, res, next) => {
   if (process.env.DB_ENV !== "testing") console.error(error);
   res.status(500).json({ error: "Something went wrong" });
 });
