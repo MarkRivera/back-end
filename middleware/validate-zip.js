@@ -1,18 +1,15 @@
-const db = require("../data/db-config");
+const Zip = require("../data/models/zip");
 
 module.exports = async (req, res, next) => {
   const zip = req.body.zipCode;
-  const isZipInDb = await db("zipcodes").where({ zipCode: zip }).first();
+  const isZipInDb = Zip.findOneBy({ zipCode: zip });
 
   try {
     if (!isZipInDb) {
-      const zipId = await db("zipcodes").insert({ zipCode: zip });
-      const newZip = await db("zipcodes").findById({ id });
-      req.newZip = newZip;
+      const zipId = Zip.add(zip);
       req.zipId = zipId;
       next();
     } else {
-      req.newZip = isZipInDb;
       req.zipId = isZipInDb.id;
       next();
     }
