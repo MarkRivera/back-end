@@ -2,11 +2,11 @@ const Zip = require("../data/models/zip");
 
 module.exports = async (req, res, next) => {
   const zip = req.body.zipCode;
-  const isZipInDb = Zip.findOneBy({ zipCode: zip });
+  const isZipInDb = await Zip.findOneBy({ zipCode: zip });
 
   try {
     if (!isZipInDb) {
-      const zipId = Zip.add(zip);
+      const zipId = await Zip.add(zip);
       req.zipId = zipId;
       next();
     } else {

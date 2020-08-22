@@ -1,17 +1,27 @@
 const db = require("../db-config");
 
-function getAllZips() {
-  return db("zipcodes").select("id", "email").orderBy("id");
+async function getAllZips() {
+  return await db("zipcodes").select("id", "email").orderBy("id");
 }
 
-function findOneBy(filter) {
-  return db("zipcodes").where(filter).first();
+async function findOneBy(filter) {
+  try {
+    const zip = await db("zipcodes").where(filter).first();
+    return zip;
+  } catch (error) {
+    console.error(error);
+    res.json({ msg: "Error finding ZIP Code" });
+  }
 }
 
 async function add(zip) {
-  const newZip = await db("zipcodes").returning("id").insert(zip);
-  const id = newZip[0];
-  return findOneBy({ id });
+  try {
+    const newZip = await db("zipcodes").returning("id").insert(zip);
+    const id = newZip[0];
+    return findOneBy({ id });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 module.exports = { getAllZips, findOneBy, add };
