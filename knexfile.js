@@ -19,33 +19,35 @@ module.exports = {
       min: 2,
       max: 10,
     },
+  },
 
-    testing: {
-      client: "pg",
-      connection: process.env.DATABASE_URL,
-      migrations: {
-        directory: "./data/migrations",
-      },
-      seeds: {
-        directory: "./data/seeds",
-      },
-      pool: {
-        min: 2,
-        max: 10,
-      },
+  testing: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./data/migrations",
     },
+    seeds: {
+      directory: "./data/seeds",
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+  },
 
-    production: {
-      client: "postgresql",
-      connection: process.env.DATABASE_URL,
-      searchPath: ["knex", "public"],
-      pool: {
-        min: 2,
-        max: 10,
-      },
-      migrations: {
-        tableName: "knex_migrations",
-      },
+  production: {
+    client: "postgresql",
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
     },
   },
 };
