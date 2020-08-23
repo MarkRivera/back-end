@@ -7,6 +7,10 @@ const morgan = require("morgan");
 // routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
+const postsRoutes = require("./routes/posts");
+
+// Custom Middleware
+const restricted = require("../middleware/restricted-route");
 
 server.use(express.json());
 server.use(helmet());
@@ -14,7 +18,8 @@ server.use(cors());
 server.use(morgan("dev"));
 
 server.use("/api/auth", authRoutes);
-server.use("/api/users", userRoutes);
+server.use("/api/users", restricted, userRoutes);
+server.use("/api/posts", postsRoutes);
 
 server.use("/", (req, res) => {
   res.send("API is running!");

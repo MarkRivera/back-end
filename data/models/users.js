@@ -1,11 +1,12 @@
 const db = require("../db-config");
 
-function getAllUsers() {
-  return db("users").select("id", "email").orderBy("id");
+async function getAllUsers() {
+  return await db("users").select("id", "email").orderBy("id");
 }
 
-function findOneBy(filter) {
-  return db("users").where(filter).first();
+async function findOneBy(filter) {
+  const user = await db("users").where(filter).first();
+  return user;
 }
 
 async function add(user) {
@@ -14,4 +15,17 @@ async function add(user) {
   return findOneBy({ id });
 }
 
-module.exports = { getAllUsers, findOneBy, add };
+async function update(id, userObject) {
+  const userUpdate = await db("users")
+    .where({ id })
+    .update(userObject, ["id", "email", "zip_id"]);
+  return userUpdate;
+}
+
+async function remove(id) {
+  const user = await findOneBy({ id });
+  const deletedNum = await db("users").where({ id }).del();
+  return user;
+}
+
+module.exports = { getAllUsers, findOneBy, add, update, remove };

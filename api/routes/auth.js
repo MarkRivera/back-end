@@ -68,6 +68,7 @@ const generateToken = (user) => {
   const payload = {
     subject: user.id,
     email: user.email,
+    isGov: user.isGovernmentOfficial,
   };
 
   const options = {
