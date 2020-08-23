@@ -10,7 +10,6 @@ async function findOneBy(filter) {
     return zip;
   } catch (error) {
     console.error(error);
-    res.json({ msg: "Error finding ZIP Code" });
   }
 }
 
