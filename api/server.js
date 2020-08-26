@@ -19,7 +19,7 @@ server.use(morgan("dev"));
 
 server.use("/api/auth", authRoutes);
 server.use("/api/users", restricted, userRoutes);
-server.use("/api/posts", postsRoutes);
+server.use("/api/posts", restricted, postsRoutes);
 
 server.use("/", (req, res) => {
   res.send("API is running!");
