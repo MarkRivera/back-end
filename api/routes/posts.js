@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET ONE POST
-router.get("/filter", filterCheck, getZipId, async (req, res, next) => {
+router.get("/filter", filterCheck, async (req, res, next) => {
   try {
     const filters = req.filters;
     const post = await Posts.getPostBy(filters);
@@ -50,7 +50,6 @@ router.put("/:id", matchUserPostID, async (req, res, next) => {
       issue: req.body.issue,
       description: req.body.description,
       photo: req.body.photo,
-      zip_id: req.body.zip,
     };
     const updatedPost = await Posts.updatePost(req.params.id, postObject);
     res.status(200).json(updatedPost[0]);
