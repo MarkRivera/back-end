@@ -63,7 +63,7 @@ router.put("/:id", matchUserPostID, async (req, res, next) => {
 router.delete("/:id", matchUserPostID, async (req, res, next) => {
   try {
     const deletedPost = await Posts.remove(req.params.id);
-    res.status(200).json(deletedUser);
+    res.status(200).json(deletedPost);
   } catch (error) {
     console.error(error);
     next(error);
