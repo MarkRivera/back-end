@@ -21,8 +21,8 @@ module.exports = {
     },
   },
 
-  testing: {
-    client: "pg",
+  test: {
+    client: "postgresql",
     connection: process.env.DATABASE_URL,
     migrations: {
       directory: "./data/migrations",

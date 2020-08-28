@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
     if (!isZipInDb) {
       const zipId = await Zip.add(zip);
       req.zipId = zipId;
+      console.log(zipId);
       next();
     } else {
       req.zipId = isZipInDb.id;
