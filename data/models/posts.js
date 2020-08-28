@@ -29,7 +29,7 @@ const updatePost = async (id, changes) => {
 };
 
 const remove = async (id) => {
-  const post = await findOneBy({ id });
+  const post = await getPostBy({ id });
   const deleted = await db("posts").where({ id }).del();
   return post;
 };
