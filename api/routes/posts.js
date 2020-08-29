@@ -23,7 +23,7 @@ router.get("/filter", filterCheck, async (req, res, next) => {
   try {
     const filters = req.filters;
     const post = await Posts.getPostBy(filters);
-    res.status(200).json({ msg: "Test", post });
+    res.status(200).json(post);
   } catch (error) {
     console.error(error);
     next(error);

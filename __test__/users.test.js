@@ -19,7 +19,7 @@ describe("Auth Endpoints", () => {
 
   it("Should Register User and receive 201 Created response", async () => {
     const userData = {
-      email: "Mark@email.com",
+      email: "Cristina@email.com",
       password: "1234",
       isGovernmentOfficial: false,
       zipCode: 51001,
@@ -33,7 +33,7 @@ describe("Auth Endpoints", () => {
 
   it("Should login user and receive 200 OK response", async () => {
     const userData = {
-      email: "Mark@email.com",
+      email: "Cristina@email.com",
       password: "1234",
     };
 
