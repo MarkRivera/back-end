@@ -13,16 +13,8 @@ describe("Server.js Test", () => {
 // Auth Endpoints Tests:
 
 describe("Auth Endpoints", () => {
-  it("Should login user and receive 200 OK response", async () => {
-    const userData = {
-      email: "Test@test.com",
-      password: "12345",
-    };
-
-    const response = await request(server)
-      .post("/api/auth/login")
-      .send(userData);
-    expect(response.status).toBe(200);
+  beforeAll(async () => {
+    await db.raw("TRUNCATE users RESTART IDENTITY CASCADE");
   });
 
   it("Should Register User and receive 201 Created response", async () => {
@@ -37,5 +29,17 @@ describe("Auth Endpoints", () => {
       .post("/api/auth/register")
       .send(userData);
     expect(response.status).toBe(201);
+  });
+
+  it("Should login user and receive 200 OK response", async () => {
+    const userData = {
+      email: "Mark@email.com",
+      password: "1234",
+    };
+
+    const response = await request(server)
+      .post("/api/auth/login")
+      .send(userData);
+    expect(response.status).toBe(200);
   });
 });
