@@ -15,10 +15,8 @@ async function findOneBy(filter) {
 
 async function add(zip) {
   try {
-    const newZip = await db("zipcodes").returning("id").insert(zip);
-    console.log(zip, newZip);
-    const id = newZip[0];
-    return findOneBy({ id });
+    const newZipID = await db("zipCodes").insert(zip);
+    console.log(newZipID);
   } catch (error) {
     console.error(error);
   }

@@ -6,9 +6,8 @@ module.exports = async (req, res, next) => {
     const isZipInDb = await Zip.findOneBy({ zipCode: zip });
 
     if (!isZipInDb) {
-      const zipId = await Zip.add(zip);
+      const zipId = await Zip.add(req.body.zipCode);
       req.zipId = zipId;
-      console.log(zipId);
       next();
     } else {
       req.zipId = isZipInDb.id;

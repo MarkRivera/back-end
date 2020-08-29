@@ -1,5 +1,6 @@
 const request = require("supertest");
 const server = require("../api/server");
+const knex = require("knex");
 const db = require("../data/db-config");
 
 describe("Server.js Test", () => {
@@ -12,22 +13,29 @@ describe("Server.js Test", () => {
 // Auth Endpoints Tests:
 
 describe("Auth Endpoints", () => {
-  beforeAll(async () => {
-    await db("users").truncate();
-  });
-
-  it("Should create a user and receive an 201 Created response", async () => {
+  it("Should login user and receive 200 OK response", async () => {
     const userData = {
       email: "Test@test.com",
       password: "12345",
+    };
+
+    const response = await request(server)
+      .post("/api/auth/login")
+      .send(userData);
+    expect(response.status).toBe(200);
+  });
+
+  it("Should Register User and receive 201 Created response", async () => {
+    const userData = {
+      email: "Mark@email.com",
+      password: "1234",
       isGovernmentOfficial: false,
-      zipCode: 12345,
+      zipCode: 51001,
     };
 
     const response = await request(server)
       .post("/api/auth/register")
       .send(userData);
     expect(response.status).toBe(201);
-    expect(response).toBeDefined();
   });
 });
